@@ -1,0 +1,107 @@
+<local:ChromeWindow x:Class="Chalkak.GalleryWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Chalkak"
+        Title="반복 캡처 결과" Width="1120" Height="780" MinWidth="760" MinHeight="500"
+        WindowStartupLocation="CenterScreen" ShowZoom="True">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="26,16,26,12">
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock x:Name="TitleText" FontSize="21" FontWeight="SemiBold"/>
+                <TextBlock x:Name="SubText" FontSize="12.5" Margin="0,3,0,0" Foreground="{DynamicResource TextSecondary}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <TextBlock Text="비슷한 사진 묶기" VerticalAlignment="Center" Margin="0,0,10,0" Foreground="{DynamicResource TextSecondary}"/>
+                <ToggleButton x:Name="GroupSwitch" Style="{StaticResource AppleSwitch}" Click="GroupSwitch_Click"/>
+            </StackPanel>
+        </Grid>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"
+                      Background="{DynamicResource Canvas}">
+            <ItemsControl x:Name="GroupList" Margin="18,14,18,20">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="0,0,0,10">
+                            <Grid Margin="8,2,8,6" Visibility="{Binding HeaderVisibility}">
+                                <TextBlock Text="{Binding HeaderText}" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <Button Content="{Binding ToggleText}" Tag="{Binding}" Click="ToggleGroup_Click"
+                                            Style="{StaticResource PillButton}" Padding="12,4" Margin="0,0,6,0"/>
+                                    <Button Content="그룹 전체 선택" Tag="{Binding}" Click="SelectGroup_Click"
+                                            Style="{StaticResource PillButton}" Padding="12,4"/>
+                                </StackPanel>
+                            </Grid>
+                            <ItemsControl ItemsSource="{Binding Visible}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Width="240" Margin="6" CornerRadius="14" BorderThickness="2.5"
+                                                Background="{DynamicResource CardBg}" Cursor="Hand"
+                                                MouseLeftButtonDown="Card_MouseDown">
+                                            <Border.Style>
+                                                <Style TargetType="Border">
+                                                    <Setter Property="BorderBrush" Value="Transparent"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                                                            <Setter Property="BorderBrush" Value="{DynamicResource Accent}"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Border.Style>
+                                            <StackPanel>
+                                                <Grid Margin="6,6,6,0" Height="128">
+                                                    <Border CornerRadius="9" Background="{DynamicResource Canvas}">
+                                                        <Border CornerRadius="9">
+                                                            <Border.Background>
+                                                                <ImageBrush ImageSource="{Binding Thumb}" Stretch="Uniform"/>
+                                                            </Border.Background>
+                                                        </Border>
+                                                    </Border>
+                                                    <CheckBox Style="{StaticResource RoundCheck}" IsChecked="{Binding IsSelected, Mode=TwoWay}"
+                                                              HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8"/>
+                                                </Grid>
+                                                <Grid Margin="12,8,12,10">
+                                                    <TextBlock Text="{Binding Label}" FontSize="12" Foreground="{DynamicResource TextSecondary}"/>
+                                                    <TextBlock Text="{Binding StatusText}" FontSize="12" FontWeight="SemiBold"
+                                                               Foreground="{Binding StatusBrush}" HorizontalAlignment="Right"/>
+                                                </Grid>
+                                            </StackPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <Grid Grid.Row="2" Margin="26,12,26,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock x:Name="StatusText" FontWeight="SemiBold" VerticalAlignment="Center" Margin="0,0,16,0"/>
+                <Button Content="전체 선택" Style="{StaticResource PillButton}" Padding="12,6" Margin="0,0,6,0" Click="SelectAll_Click"/>
+                <Button Content="전체 해제" Style="{StaticResource PillButton}" Padding="12,6" Click="SelectNone_Click"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock x:Name="ResultText" VerticalAlignment="Center" Margin="0,0,14,0" Foreground="{DynamicResource TextSecondary}"/>
+                <Button x:Name="FolderBtn" Content="폴더 열기" Style="{StaticResource PillButton}" Padding="14,8" Margin="0,0,8,0"
+                        Click="Folder_Click" Visibility="Collapsed"/>
+                <Button x:Name="SaveBtn" Content="선택한 사진 저장" Style="{StaticResource PrimaryButton}" Padding="20,8" Click="Save_Click"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</local:ChromeWindow>

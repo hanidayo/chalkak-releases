@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <!-- 공유(Windows 공유 창) 기능은 10.0.19041 이상 TFM이 필요합니다. build.bat 이 실패하면 -p:NoShare=true 로 자동 재시도합니다. -->
+    <TargetFramework Condition="'$(NoShare)' != 'true'">net8.0-windows10.0.19041.0</TargetFramework>
+    <TargetFramework Condition="'$(NoShare)' == 'true'">net8.0-windows</TargetFramework>
+    <DefineConstants Condition="'$(NoShare)' != 'true'">$(DefineConstants);CHALKAK_SHARE</DefineConstants>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>Chalkak</AssemblyName>
+    <RootNamespace>Chalkak</RootNamespace>
+    <Product>찰칵</Product>
+    <AssemblyTitle>찰칵</AssemblyTitle>
+    <Description>찰칵 - 가볍고 예쁜 화면 캡처</Description>
+    <Version>1.0.0</Version>
+    <ApplicationIcon>Assets\chalkak.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <SatelliteResourceLanguages>ko;en</SatelliteResourceLanguages>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <ConcurrentGarbageCollection>false</ConcurrentGarbageCollection>
+    <ServerGarbageCollector>false</ServerGarbageCollector>
+    <TieredPGO>false</TieredPGO>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <RuntimeHostConfigurationOption Include="System.GC.ConserveMemory" Value="7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\chalkak.ico" />
+    <Resource Include="Assets\Sounds\*.wav" />
+  </ItemGroup>
+
+</Project>
