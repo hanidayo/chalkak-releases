@@ -57,5 +57,3 @@ Windows용 애플 감성 화면 캡처 프로그램. 시스템 트레이에 상�
 2. 커밋 후 태그를 푸시합니다: `git tag v1.0.1 && git push origin main v1.0.1`
 3. GitHub Actions(`.github/workflows/release.yml`)가 빌드해서 릴리스에 `Chalkak.exe`를 올립니다.
 4. 실행 중인 찰칵이 하루에 한 번(그리고 시작할 때) 확인해 새 버전을 알려 줍니다.
-
-업데이트 저장소: https://github.com/hanidayo/chalkak-releases

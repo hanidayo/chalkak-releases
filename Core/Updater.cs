@@ -12,13 +12,12 @@ using System.Windows.Threading;
 namespace Chalkak
 {
     /// <summary>
-    /// GitHub 릴리스(hanidayo/chalkak-releases)에서 새 버전을 찾아 내려받고, 실행 파일을 교체한 뒤 다시 시작한다.
+    /// GitHub 릴리스에서 새 버전을 찾아 내려받고, 실행 파일을 교체한 뒤 다시 시작한다.
     /// 보내는 정보는 없고(익명 GET 요청), 내려받은 파일은 GitHub 가 알려주는 SHA-256 과 비교해서 확인한다.
     /// </summary>
     internal static class Updater
     {
         const string Owner = "hanidayo", Repo = "chalkak-releases", AssetName = "Chalkak.exe";
-        public static string ReleasesPage => "https://github.com/" + Owner + "/" + Repo + "/releases";
 
         public class Info
         {
@@ -167,7 +166,7 @@ namespace Chalkak
             {
                 busy = false;
                 try { if (tmp != null && File.Exists(tmp)) File.Delete(tmp); } catch { }
-                Toast.Show("업데이트하지 못했어요", ex.Message, "다운로드 페이지", () => { try { Process.Start(new ProcessStartInfo(ReleasesPage) { UseShellExecute = true }); } catch { } }, 9000);
+                Toast.Show("업데이트하지 못했어요", ex.Message);
             }
         }
 

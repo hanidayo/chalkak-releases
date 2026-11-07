@@ -15,11 +15,10 @@ namespace Chalkak
         /// <summary>내장 셔터 소리 (Id, 표시 이름). "custom" 은 사용자가 고른 wav 파일.</summary>
         public static readonly KeyValuePair<string, string>[] Presets =
         {
-            new KeyValuePair<string, string>("dslr", "DSLR (찰칵-철컥)"),
-            new KeyValuePair<string, string>("film", "필름 카메라 (셔터 + 필름 감기)"),
-            new KeyValuePair<string, string>("compact", "콤팩트 카메라"),
-            new KeyValuePair<string, string>("mirrorless", "미러리스 (깔끔한 한 번)"),
-            new KeyValuePair<string, string>("soft", "부드러운 클릭 (조용한 곳)"),
+            new KeyValuePair<string, string>("beepshot", "삐빅 + 찰칵 (카메라 AF 확인음)"),
+            new KeyValuePair<string, string>("shot", "찰칵만"),
+            new KeyValuePair<string, string>("burst", "연사 (찰칵 · 찰칵 · 찰칵)"),
+            new KeyValuePair<string, string>("soft", "삐빅 + 찰칵 (조용하게)"),
         };
 
         static readonly Dictionary<string, byte[]> cache = new Dictionary<string, byte[]>();
@@ -45,7 +44,7 @@ namespace Chalkak
                 {
                     try { data = File.ReadAllBytes(s.SoundCustomPath); } catch { data = null; }
                 }
-                if (data == null) data = Builtin(s.SoundName == "custom" ? "dslr" : s.SoundName);
+                if (data == null) data = Builtin(s.SoundName == "custom" ? "beepshot" : s.SoundName);
                 if (data == null) return;
                 data = ApplyVolume(data, s.SoundVolume);
                 var old = player;

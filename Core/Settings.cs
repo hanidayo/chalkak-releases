@@ -17,7 +17,7 @@ namespace Chalkak
         public string SaveFolder { get; set; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), "찰칵");
         public bool ShowPreview { get; set; } = true;
         public bool PlaySound { get; set; } = true;
-        public string SoundName { get; set; } = "dslr";          // dslr / film / compact / mirrorless / soft / custom
+        public string SoundName { get; set; } = "beepshot";          // beepshot / shot / burst / soft / custom
         public int SoundVolume { get; set; } = 80;               // 0~100
         public string SoundCustomPath { get; set; } = "";
         public bool IncludeCursor { get; set; } = false;
@@ -105,7 +105,7 @@ namespace Chalkak
             if (!(RepeatDurationSec >= 1) || RepeatDurationSec > 3600) RepeatDurationSec = 30;
             if (MaxRepeatFrames < 10 || MaxRepeatFrames > 5000) MaxRepeatFrames = 600;
             if (SoundVolume < 0 || SoundVolume > 100) SoundVolume = 80;
-            if (string.IsNullOrWhiteSpace(SoundName)) SoundName = "dslr";
+            if (string.IsNullOrWhiteSpace(SoundName) || !(SoundName == "custom" || SoundName == "beepshot" || SoundName == "shot" || SoundName == "burst" || SoundName == "soft")) SoundName = "beepshot";
             if (Hotkeys == null) Hotkeys = DefaultHotkeys();
             foreach (var kv in DefaultHotkeys())
                 if (!Hotkeys.ContainsKey(kv.Key)) Hotkeys[kv.Key] = kv.Value;

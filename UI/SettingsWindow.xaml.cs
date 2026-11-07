@@ -199,9 +199,6 @@ namespace Chalkak
             };
             Row("새 버전 확인", Horiz(status, check));
 
-            var page = SmallBtn("릴리스 페이지");
-            page.Click += (s, e) => { try { System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(Updater.ReleasesPage) { UseShellExecute = true }); } catch { } };
-            Row("GitHub", page, "hanidayo/chalkak-releases");
             var data = SmallBtn("열기");
             data.Click += (s, e) => ExplorerUtil.OpenFolder(AppSettings.DataDir);
             Row("설정·기록 폴더", data, "설정 파일과 오류 기록이 들어 있어요.");
