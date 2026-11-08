@@ -25,7 +25,7 @@ namespace Chalkak
         bool textIsNew;
 
         static readonly System.Collections.Generic.List<EditorWindow> opened = new System.Collections.Generic.List<EditorWindow>();
-        const int MaxOpenWindows = 3;
+        const int MaxOpenWindows = 10;
 
         bool IsDirty { get { return surface != null && surface.Version != savedVersion; } }
 
