@@ -72,7 +72,7 @@ namespace Chalkak
                 AppSettings.Current.Save();
                 if (info == null || info.Version <= Current)
                 {
-                    if (manual) Toast.Show("최신 버전이에요", "찰칵 " + Current.ToString(3));
+                    if (manual) Toast.Show("최신 버전이에요", "찰칵 " + Current.ToString(2));
                     return null;
                 }
                 Offer(info);
@@ -116,7 +116,7 @@ namespace Chalkak
 
         static void Offer(Info info)
         {
-            Toast.Show("새 버전 " + info.Version.ToString(3) + "이 있어요", "지금 받아서 다시 시작할 수 있어요.", "업데이트", () => { var _ = InstallAsync(info); }, 15000);
+            Toast.Show("새 버전 " + info.Version.ToString(2) + "이 있어요", "지금 받아서 다시 시작할 수 있어요.", "업데이트", () => { var _ = InstallAsync(info); }, 15000);
         }
 
         /// <summary>내려받아 검증한 뒤, 현재 실행 파일을 교체하고 새 버전을 시작한다.</summary>
@@ -127,9 +127,9 @@ namespace Chalkak
             string tmp = null;
             try
             {
-                Toast.Show("업데이트를 내려받는 중이에요", "찰칵 " + info.Version.ToString(3), null, null, 20000);
+                Toast.Show("업데이트를 내려받는 중이에요", "찰칵 " + info.Version.ToString(2), null, null, 20000);
                 Directory.CreateDirectory(UpdateDir);
-                tmp = Path.Combine(UpdateDir, "Chalkak-" + info.Version.ToString(3) + ".exe.download");
+                tmp = Path.Combine(UpdateDir, "Chalkak-" + info.Version.ToString(2) + ".exe.download");
                 using (var resp = await http.GetAsync(info.Url, HttpCompletionOption.ResponseHeadersRead))
                 {
                     resp.EnsureSuccessStatusCode();

@@ -16,7 +16,7 @@
     <Product>찰칵</Product>
     <AssemblyTitle>찰칵</AssemblyTitle>
     <Description>찰칵 - 가볍고 예쁜 화면 캡처</Description>
-    <Version>1.0.0</Version>
+    <Version>1.1</Version>
     <ApplicationIcon>Assets\chalkak.ico</ApplicationIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <SatelliteResourceLanguages>ko;en</SatelliteResourceLanguages>

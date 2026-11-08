@@ -184,7 +184,7 @@ namespace Chalkak
         void BuildAbout()
         {
             Section("찰칵");
-            var ver = new TextBlock { Text = "버전 " + Updater.Current.ToString(3), VerticalAlignment = VerticalAlignment.Center, Foreground = Res("TextSecondary") };
+            var ver = new TextBlock { Text = "버전 " + Updater.Current.ToString(2), VerticalAlignment = VerticalAlignment.Center, Foreground = Res("TextSecondary") };
             Row("현재 버전", ver);
             Row("업데이트 자동 확인", Switch(S.AutoUpdate, v => { S.AutoUpdate = v; S.Save(); }), "켜 두면 새 버전이 나왔을 때 알려줘요. 알림에서 ‘업데이트’를 누르면 받아서 다시 시작해요.");
 
@@ -194,7 +194,7 @@ namespace Chalkak
             {
                 check.IsEnabled = false; status.Text = "확인하는 중…";
                 var info = await Updater.CheckAsync(true);
-                status.Text = info != null ? "새 버전 " + info.Version.ToString(3) + " 이 있어요" : "마지막 확인  " + S.LastUpdateCheck;
+                status.Text = info != null ? "새 버전 " + info.Version.ToString(2) + " 이 있어요" : "마지막 확인  " + S.LastUpdateCheck;
                 check.IsEnabled = true;
             };
             Row("새 버전 확인", Horiz(status, check));
